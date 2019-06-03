@@ -20,22 +20,25 @@ export class App extends Component {
     .then(response => response.json())
     .then(results => this.props.addPresidents(results))
     .catch(error => this.props.hasErrored(error))
-    
   }
-
-
 
   render() {
     const { presidents, isLoading, hasErrored } = this.props;
-    console.log(presidents)
-    return (
-      <div className="App">
-        <h1>Presidents and Assholes</h1>
-        <CardContainer presidents={presidents}/>
-      </div>
-    );
+    console.log(isLoading)
+    if (isLoading && !presidents.length) {
+      return(<p>Hold on while we fetch these presidential assholes</p>)
+    }
+    if (hasErrored && !presidents.length) {
+      return (<p>I'm sorry, but there was error fetching your presidents and asshole data</p>)
+    } else {
+      return (
+        <div className="App">
+          <h1>Presidents and Assholes</h1>
+          <CardContainer presidents={presidents}/>
+        </div>
+      );
+    }
   }
-  
 }
 
 export const mapStateToProps = state => ({
