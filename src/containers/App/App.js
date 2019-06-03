@@ -24,12 +24,11 @@ export class App extends Component {
 
   render() {
     const { presidents, isLoading, hasErrored } = this.props;
-    console.log(isLoading)
     if (isLoading && !presidents.length) {
       return(<p>Hold on while we fetch these presidential assholes</p>)
     }
-    if (hasErrored && !presidents.length) {
-      return (<p>I'm sorry, but there was error fetching your presidents and asshole data</p>)
+   if (hasErrored && !presidents.length) {
+      return (<p>I'm sorry, but there was an error fetching your presidents and asshole data</p>)
     } else {
       return (
         <div className="App">
