@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import CardContainer from '../../components/CardContainer/CardContainer'
-import { addPresidents } from '../../actions/';
+import { addPresidents, isLoading, hasErrored } from '../../actions/';
 import { connect } from 'react-redux';
 
 
@@ -10,7 +10,7 @@ export class App extends Component {
   constructor() {
     super()
     this.state = {
-
+    
     }
   }
 
@@ -19,13 +19,14 @@ export class App extends Component {
     fetch(presidentsUrl)
     .then(response => response.json())
     .then(results => this.props.addPresidents(results))
+    .catch(error => this.props.hasErrored(error))
+    
   }
 
 
 
   render() {
-    const { presidents } = this.props;
-    console.log(presidents)
+    const { presidents, isLoading, hasErrored } = this.props;
     return (
       <div className="App">
         <h1>Presidents and Assholes</h1>
@@ -37,11 +38,15 @@ export class App extends Component {
 }
 
 export const mapStateToProps = state => ({
-  presidents: state.presidents
+  presidents: state.presidents,
+  hasErrored: state.hasErrored,
+  isLoading: state.isLoading
 })
 
 export const mapDispatchToProps = dispatch => ({
-  addPresidents: newPresident => dispatch(addPresidents(newPresident))
+  addPresidents: newPresident => dispatch(addPresidents(newPresident)),
+  isLoading: bool => dispatch(isLoading(bool)),
+  hasErrored: bool => dispatch(hasErrored(bool))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
