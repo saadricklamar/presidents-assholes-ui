@@ -10,7 +10,7 @@ export class App extends Component {
   constructor() {
     super()
     this.state = {
-      
+
     }
   }
 
@@ -28,6 +28,7 @@ export class App extends Component {
     console.log(presidents)
     return (
       <div className="App">
+        <h1>Presidents and Assholes</h1>
         <CardContainer presidents={presidents}/>
       </div>
     );
