@@ -27,6 +27,7 @@ export class App extends Component {
 
   render() {
     const { presidents, isLoading, hasErrored } = this.props;
+    console.log(presidents)
     return (
       <div className="App">
         <h1>Presidents and Assholes</h1>
